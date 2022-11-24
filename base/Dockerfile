@@ -1,0 +1,45 @@
+# Pinned to 2022-11-12 version of "ubuntu" tag
+FROM codercom/enterprise-base@sha256:f58cce5a5c00dca76e53a54aab3eea0fcac3be9875fd0b9bda1d8e16f6bf5c22
+
+USER root
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        bash-completion \
+        ca-certificates \
+        curl \
+        direnv \
+        dnsutils \
+        ffmpeg \
+        git \
+        iproute2 \
+        iputils-ping \
+        libsm6 \
+        libxext6 \
+        net-tools \
+        openssh-client \
+        python3.8 \
+        python3.8-venv \
+        tmux \
+        unzip \
+        zsh \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install -Uq pip pip-tools
+ENV PATH="${PATH}:/home/coder/.local/bin"
+
+ARG AWS_VERSION=2.7.18
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_VERSION}.zip" -o "/tmp/awscliv2.zip" && \
+    unzip -q /tmp/awscliv2.zip -d /tmp && \
+    /tmp/aws/install && \
+    rm -rf /tmp/aws /tmp/awscliv2.zip
+
+ARG KUBE_VERSION=1.22.12
+RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin
+
+RUN ssh-keyscan github.com 2>/dev/null > /etc/ssh/ssh_known_hosts
+
+USER coder
+WORKDIR /home/coder

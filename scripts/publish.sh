@@ -20,11 +20,11 @@ fi
 IMAGE_NAME="$1"
 VERSION="${2#v}"
 
-echo "🏷️ Adding tags for image '${IMAGE_NAME}:base': ${VERSION}-base, latest"
+echo "🏷️ Adding additional tags for image '${IMAGE_NAME}:base': ${VERSION}-base, latest"
 docker tag "${IMAGE_NAME}:base" "${IMAGE_NAME}:${VERSION}-base"
 docker tag "${IMAGE_NAME}:base" "${IMAGE_NAME}:latest"
 
-echo "📤 Pushing '${IMAGE_NAME}:${TAG}-base', '${IMAGE_NAME}:base', and '${IMAGE_NAME}:latest'"
-docker push "${IMAGE_NAME}:${TAG}-base"
+echo "📤 Pushing '${IMAGE_NAME}:${VERSION}-base', '${IMAGE_NAME}:base', and '${IMAGE_NAME}:latest'"
+docker push "${IMAGE_NAME}:${VERSION}-base"
 docker push "${IMAGE_NAME}:base"
 docker push "${IMAGE_NAME}:latest"

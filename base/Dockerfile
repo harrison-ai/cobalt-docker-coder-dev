@@ -3,11 +3,14 @@ FROM codercom/enterprise-base@sha256:f58cce5a5c00dca76e53a54aab3eea0fcac3be9875f
 
 USER root
 
-RUN apt-get update \
+RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.list \
+    && apt-get update \
     && apt-get install --no-install-recommends -y \
+        apt-utils \
         bash-completion \
         ca-certificates \
         curl \
+        dialog \
         direnv \
         dnsutils \
         ffmpeg \
@@ -23,6 +26,8 @@ RUN apt-get update \
         tmux \
         unzip \
         zsh \
+    && apt-get upgrade -y \
+    && yes | unminimize \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install -Uq pip pip-tools

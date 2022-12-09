@@ -12,7 +12,7 @@ Currently we provide a single image based on [Coder’s “Enterprise Base” Do
 * Python 3.8
 * [AWS CLI](https://aws.amazon.com/cli/)
 * [Kubernetes CL tool (`kubectl`)](https://kubernetes.io/docs/reference/kubectl/)
-* other useful utilities (`ffmpeg`, `libsm6`, `libxext6`, `direnv`, `net-tools`, `iputils-ping`, `dnsutils`, `iproute2`, `tmux`, `bash-completion`, `zsh`)
+* other useful utilities (`ffmpeg`, `libsm6`, `libxext6`, `direnv`, `net-tools`, `iputils-ping`, `dnsutils`, `iproute2`, `tmux`, `bash-completion`, `zsh`, `emacs`, `nano`)
 
 ## 🚀 Usage
 

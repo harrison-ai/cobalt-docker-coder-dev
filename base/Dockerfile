@@ -28,6 +28,16 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         zsh \
         nano \
         emacs \
+        screen \
+        build-essential \
+        libssl-dev \
+        libffi-dev \
+        libreadline-dev \
+        libncurses5-dev \
+        libbz2-dev \
+        liblzma-dev \
+        zlib1g-dev \
+        libsqlite3-dev \
     && apt-get upgrade -y \
     && yes | unminimize \
     && rm -rf /var/lib/apt/lists/*
@@ -56,4 +66,12 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
 RUN ssh-keyscan github.com 2>/dev/null > /etc/ssh/ssh_known_hosts
 
 USER coder
+
+# Install pyenv that has been requested by the clinical team.
+ENV PYENV_ROOT="/home/coder/.pyenv"
+ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
+# Latest release as of 2022-12-12 (https://github.com/pyenv/pyenv/releases)
+ENV PYENV_GIT_TAG=v2.3.8
+RUN curl https://pyenv.run | bash
+
 WORKDIR /home/coder

@@ -28,6 +28,16 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         zsh \
         nano \
         emacs \
+        screen \
+        # --- pyenv dependencies ---
+        libssl-dev \
+        libbz2-dev \
+        libncurses5-dev \
+        libffi-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        liblzma-dev \
+        # -x- pyenv dependencies -x-
     && apt-get upgrade -y \
     && yes | unminimize \
     && rm -rf /var/lib/apt/lists/*
@@ -56,4 +66,5 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
 RUN ssh-keyscan github.com 2>/dev/null > /etc/ssh/ssh_known_hosts
 
 USER coder
+
 WORKDIR /home/coder

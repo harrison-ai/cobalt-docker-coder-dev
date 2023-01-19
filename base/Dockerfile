@@ -15,6 +15,7 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         dnsutils \
         ffmpeg \
         git \
+        jq \
         iproute2 \
         iputils-ping \
         libsm6 \

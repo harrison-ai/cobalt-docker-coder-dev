@@ -55,10 +55,15 @@ ENV PATH="${PATH}:/home/coder/.local/bin"
 
 ARG S5CMD_VERSION=2.0.0
 RUN curl -L -o "/tmp/s5cmd.tar.gz" "https://github.com/peak/s5cmd/releases/download/v${S5CMD_VERSION}/s5cmd_${S5CMD_VERSION}_Linux-64bit.tar.gz" && \
-    mkdir -p /tmp/s5cmd && \
-    tar -xzf /tmp/s5cmd.tar.gz -C /tmp/s5cmd && \
-    cp -p /tmp/s5cmd/s5cmd /usr/local/bin && \
+    tar -xzf /tmp/s5cmd.tar.gz -C /tmp && \
+    cp -p /tmp/s5cmd /usr/local/bin && \
     rm -rf /tmp/s5cmd*
+
+ARG RCLONE_VERSION=1.62.2
+RUN curl -L -o "/tmp/rclone.zip" "https://github.com/rclone/rclone/releases/download/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip" && \
+    unzip /tmp/rclone.zip -d /tmp && \
+    cp -p /tmp/rclone-v${RCLONE_VERSION}-linux-amd64/rclone /usr/local/bin && \
+    rm -rf /tmp/rclone*
 
 ARG AWS_VERSION=2.7.18
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_VERSION}.zip" -o "/tmp/awscliv2.zip" && \

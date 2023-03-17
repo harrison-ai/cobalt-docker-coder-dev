@@ -53,6 +53,12 @@ ENV LC_ALL en_US.UTF-8
 RUN pip install -Uq pip pip-tools
 ENV PATH="${PATH}:/home/coder/.local/bin"
 
+ARG S5CMD_VERSION=2.0.0
+RUN curl -L -o "/tmp/s5cmd.tar.gz" "https://github.com/peak/s5cmd/releases/download/v${S5CMD_VERSION}/s5cmd_${S5CMD_VERSION}_Linux-64bit.tar.gz" && \
+    chmod +rw /tmp/README.md /tmp/CHANGELOG.md /tmp/LICENSE /tmp/s5cmd.tar.gz && \
+    tar -xzf /tmp/s5cmd.tar.gz -C /usr/local/bin && \
+    rm -rf /tmp/s5cmd.tar.gz
+
 ARG AWS_VERSION=2.7.18
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_VERSION}.zip" -o "/tmp/awscliv2.zip" && \
     unzip -q /tmp/awscliv2.zip -d /tmp && \

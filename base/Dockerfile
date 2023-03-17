@@ -1,5 +1,5 @@
-# Pinned to 2022-11-12 version of "ubuntu" tag
-FROM codercom/enterprise-base@sha256:f58cce5a5c00dca76e53a54aab3eea0fcac3be9875fd0b9bda1d8e16f6bf5c22
+# Pinned to 2023-03-14 version of "ubuntu" tag
+FROM codercom/enterprise-base@sha256:991819021919f7e7132f8843f9b49de7c7072e6c4e1e358c6a9d0ba0587f4c87
 
 USER root
 
@@ -55,9 +55,10 @@ ENV PATH="${PATH}:/home/coder/.local/bin"
 
 ARG S5CMD_VERSION=2.0.0
 RUN curl -L -o "/tmp/s5cmd.tar.gz" "https://github.com/peak/s5cmd/releases/download/v${S5CMD_VERSION}/s5cmd_${S5CMD_VERSION}_Linux-64bit.tar.gz" && \
-    chmod +rw /tmp/README.md /tmp/CHANGELOG.md /tmp/LICENSE /tmp/s5cmd.tar.gz && \
-    tar -xzf /tmp/s5cmd.tar.gz -C /usr/local/bin && \
-    rm -rf /tmp/s5cmd.tar.gz
+    mkdir -p /tmp/s5cmd && \
+    tar -xzf /tmp/s5cmd.tar.gz -C /tmp/s5cmd && \
+    cp -p /tmp/s5cmd/s5cmd /usr/local/bin && \
+    rm -rf /tmp/s5cmd*
 
 ARG AWS_VERSION=2.7.18
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_VERSION}.zip" -o "/tmp/awscliv2.zip" && \

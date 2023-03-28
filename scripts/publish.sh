@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# Publishes images to Docker Hub
+# Publishes images to Github Container Registry
 
 # We expect this repo to one day contain multiple useful Coder images, but currently it
 # only has one option, 'base'. To keep tag names coherent, we're providing three ways to
 # reference variants:
-#   * by release number and variant name (e.g. harrisonai/coder-dev:0.1.0-base),
-#   * by variant name alone (e.g. harrisonai/coder-dev:base, which will always use the
+#   * by release number and variant name (e.g. ghcr.io/harrison-ai/coder-dev:0.1.0-base),
+#   * by variant name alone (e.g. ghcr.io/harrison-ai/coder-dev:base, which will always use the
 #     most recent release), and
 #   * by default/latest, which will always be the most recent release of 'base'.
 

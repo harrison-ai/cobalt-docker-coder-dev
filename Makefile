@@ -1,6 +1,6 @@
 
 .DEFAULT_GOAL := help
-IMAGE_NAME := harrisonai/coder-dev
+IMAGE_NAME := ghcr.io/harrison-ai/coder-dev
 
 build:
 	./scripts/build.sh $(IMAGE_NAME)

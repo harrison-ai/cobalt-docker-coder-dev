@@ -53,7 +53,7 @@ ENV LC_ALL en_US.UTF-8
 RUN pip install -Uq pip pip-tools
 ENV PATH="${PATH}:/home/coder/.local/bin"
 
-ARG S5CMD_VERSION=2.0.0
+ARG S5CMD_VERSION=2.1.0
 RUN curl -L -o "/tmp/s5cmd.tar.gz" "https://github.com/peak/s5cmd/releases/download/v${S5CMD_VERSION}/s5cmd_${S5CMD_VERSION}_Linux-64bit.tar.gz" && \
     tar -xzf /tmp/s5cmd.tar.gz -C /tmp && \
     cp -p /tmp/s5cmd /usr/local/bin && \

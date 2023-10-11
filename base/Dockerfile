@@ -83,10 +83,6 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
     chmod +x kubectl && \
     mv kubectl /usr/local/bin
 
-ARG PDU_VERSION=0.9.0
-RUN curl -L https://github.com/KSXGitHub/parallel-disk-usage/releases/download/${PDU_VERSION}/pdu-x86_64-unknown-linux-gnu -o /usr/local/bin/pdu && \
-    chmod +x /usr/local/bin/pdu
-
 COPY --from=0 /workdir/parallel-disk-usage/target/release/pdu /usr/local/bin/pdu
 RUN  chmod +x /usr/local/bin/pdu
 

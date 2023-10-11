@@ -1,3 +1,10 @@
+FROM rust:bullseye AS builder
+WORKDIR /workdir
+ARG PDU_VERSION=0.9.0
+RUN git clone --depth 1 --branch ${PDU_VERSION} https://github.com/KSXGitHub/parallel-disk-usage.git && \
+    cd parallel-disk-usage && \
+    cargo build --bin pdu --release
+
 # Pinned to 2023-03-14 version of "ubuntu" tag
 FROM codercom/enterprise-base@sha256:991819021919f7e7132f8843f9b49de7c7072e6c4e1e358c6a9d0ba0587f4c87
 
@@ -79,6 +86,9 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
 ARG PDU_VERSION=0.9.0
 RUN curl -L https://github.com/KSXGitHub/parallel-disk-usage/releases/download/${PDU_VERSION}/pdu-x86_64-unknown-linux-gnu -o /usr/local/bin/pdu && \
     chmod +x /usr/local/bin/pdu
+
+COPY --from=0 /workdir/parallel-disk-usage/target/release/pdu /usr/local/bin/pdu
+RUN  chmod +x /usr/local/bin/pdu
 
 RUN ssh-keyscan github.com 2>/dev/null > /etc/ssh/ssh_known_hosts
 

@@ -76,6 +76,10 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
     chmod +x kubectl && \
     mv kubectl /usr/local/bin
 
+ARG PDU_VERSION=0.9.0
+RUN curl -L https://github.com/KSXGitHub/parallel-disk-usage/releases/download/${PDU_VERSION}/pdu-x86_64-unknown-linux-gnu -o /usr/bin/pdu && \
+    chmod +x /usr/bin/pdu
+
 RUN ssh-keyscan github.com 2>/dev/null > /etc/ssh/ssh_known_hosts
 
 USER coder

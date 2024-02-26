@@ -4,6 +4,8 @@ FROM codercom/enterprise-base@sha256:991819021919f7e7132f8843f9b49de7c7072e6c4e1
 USER root
 
 RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.list \
+    # Adding deadsnakes ppa to install more recent Python versions packaged for Ubuntu.
+    && add-apt-repository ppa:deadsnakes/ppa \
     && apt-get update \
     && apt-get install --no-install-recommends -y \
         apt-utils \
@@ -24,6 +26,8 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         openssh-client \
         python3.8 \
         python3.8-venv \
+        python3.11 \
+        python3.11-venv \
         tmux \
         unzip \
         zsh \

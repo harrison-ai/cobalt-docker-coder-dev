@@ -34,6 +34,8 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         nano \
         emacs \
         screen \
+        # --- NVIDIA based utils ---
+        nvtop \
         # --- pyenv dependencies ---
         libssl-dev \
         libbz2-dev \

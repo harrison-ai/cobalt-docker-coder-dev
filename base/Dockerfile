@@ -36,6 +36,9 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         screen \
         # --- NVIDIA based utils ---
         nvtop \
+        # --- infiniband verbs are required for GPU-GPU commms --
+        libibverbs1 \
+        libibverbs-dev \
         # --- pyenv dependencies ---
         libssl-dev \
         libbz2-dev \

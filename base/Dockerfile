@@ -28,6 +28,11 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         python3.8-venv \
         python3.11 \
         python3.11-venv \
+        # --- python 3.10 needed for new projects ---
+        python3.10-dev \
+        python3.10-distutils \
+        python3.10-venv \
+        # utils ---
         tmux \
         unzip \
         zsh \

@@ -94,13 +94,12 @@ RUN curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl
 # while newer versions give faster reads of gz files.
 ARG ZLIB_VERSION=1.3.1
 RUN curl -L -o "/tmp/zlib.zip" "https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zlib${ZLIB_VERSION//./}.zip" && \
-    unzip /tmp/zlib.zip -d /tmp
-WORKDIR /tmp/zlib-${ZLIB_VERSION}
-RUN ./configure && \
-    make install
-WORKDIR /
-RUN rm -rf /tmp/zlib*
-
+    unzip /tmp/zlib.zip -d /tmp && \
+    cd /tmp/zlib-${ZLIB_VERSION} && \
+    ./configure && \
+    make install && \
+    cd / && \
+    rm -rf /tmp/zlib*
 
 # Workaround issue described here https://github.com/harrison-ai/cobalt-docker-coder-dev/issues/8
 # Until Ubuntu upgrade.

@@ -1,4 +1,4 @@
-name: Build and push image from PR
+name: PR build and push
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Build and push image from PR
+    name: Push pre-release image from PR
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to ghcr
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -30,3 +30,11 @@ jobs:
         run: make pr-image
         env:
           TAG: ${{ github.head_ref }}
+
+      - name: Cleanup older pre-release images
+        uses: actions/delete-package-versions@v5
+        with: 
+          package-name: 'coder-dev'
+          package-type: 'container'
+          min-versions-to-keep: 10
+          delete-only-pre-release-versions: "true"

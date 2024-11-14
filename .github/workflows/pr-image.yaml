@@ -37,4 +37,4 @@ jobs:
           package-name: 'coder-dev'
           package-type: 'container'
           min-versions-to-keep: 10
-          delete-only-pre-release-versions: "true"
+          ignore-versions: '^\d+\.\d+\.\d+-base$'

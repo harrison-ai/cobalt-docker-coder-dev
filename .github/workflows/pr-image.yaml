@@ -1,0 +1,40 @@
+name: PR build and push
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: Push pre-release image from PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to ghcr
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the image
+        run: make build
+
+      - name: Push PR image to the registry
+        run: make pr-image
+        env:
+          TAG: ${{ github.head_ref }}
+
+      - name: Cleanup older pre-release images
+        uses: actions/delete-package-versions@v5
+        with: 
+          package-name: 'coder-dev'
+          package-type: 'container'
+          min-versions-to-keep: 10
+          ignore-versions: '^\d+\.\d+\.\d+-base$'

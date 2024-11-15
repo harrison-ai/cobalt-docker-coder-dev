@@ -12,5 +12,9 @@ publish:
 	@test -n "${TAG}" || ( echo "TAG environment variable must be set" && return 1 )
 	./scripts/publish.sh $(IMAGE_NAME) ${TAG}
 
+pr-image:
+	@test -n "${TAG}" || ( echo "TAG environment variable must be set" && return 1 )
+	./scripts/pr-image.sh $(IMAGE_NAME) ${TAG}
+
 help:
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)

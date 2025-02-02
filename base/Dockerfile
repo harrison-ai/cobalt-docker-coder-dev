@@ -27,6 +27,7 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         python3.8 \
         python3.8-venv \
         python3.11 \
+        python3.11-dev \
         python3.11-venv \
         python3.11-distutils \
         # --- python 3.10 needed for new projects ---

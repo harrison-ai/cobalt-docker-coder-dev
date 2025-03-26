@@ -41,9 +41,7 @@ RUN sed -i 's#/archive.ubuntu.com#/au.archive.ubuntu.com#g' /etc/apt/sources.lis
         nano \
         emacs \
         screen \
-        # PostgreSQL client (proxychains is required for psql to work with Tailscale proxy)
         postgresql-client \
-        proxychains4 \
         # --- NVIDIA based utils ---
         nvtop \
         # --- infiniband verbs are required for GPU-GPU commms --

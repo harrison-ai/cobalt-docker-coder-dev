@@ -11,4 +11,4 @@ fi
 
 IMAGE_NAME="$1"
 
-docker build -t "${IMAGE_NAME}:base" base
+docker buildx build --platform linux/amd64 -t "${IMAGE_NAME}:base" base
